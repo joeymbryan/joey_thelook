@@ -20,6 +20,12 @@ explore: orders {
     relationship: many_to_one
     sql_on:  ${order_items.inventory_item_id} = ${products.id} ;;
   }
+  join: inventory_items {
+    view_label: "Orders"
+    relationship: one_to_many
+    sql_on: ${products.id} = ${inventory_items.product_id} ;;
+
+  }
   join: users {
     view_label: "Users"
     relationship: many_to_one

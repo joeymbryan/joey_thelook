@@ -40,6 +40,11 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
+#   dimension: gross_prophet_margin {
+#     type: number
+#     sql: round(${TABLE}.sale_price - ${inventory_items}.cost,2) ;;
+#   }
+
   measure: total_order_items {
     type: count
     drill_fields: [id]

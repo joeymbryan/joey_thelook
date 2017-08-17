@@ -3,6 +3,7 @@ view: inventory_items {
 
   dimension: id {
     primary_key: yes
+    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -13,6 +14,7 @@ view: inventory_items {
   }
 
   dimension_group: created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -27,11 +29,13 @@ view: inventory_items {
   }
 
   dimension: product_id {
+    hidden: yes
     type: number
     sql: ${TABLE}.product_id ;;
   }
 
   dimension_group: sold {
+    hidden: yes
     type: time
     timeframes: [
       raw,
