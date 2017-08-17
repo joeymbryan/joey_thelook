@@ -24,7 +24,7 @@ view: users {
     sql: ${TABLE}.country ;;
   }
 
-  dimension_group: created {
+  dimension_group: joined{
     type: time
     timeframes: [
       raw,

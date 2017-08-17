@@ -1,4 +1,4 @@
-connection: "das42-timesheets"
+connection: "thelook"
 
 # include all the views
 include: "*.view"
