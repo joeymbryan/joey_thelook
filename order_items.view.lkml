@@ -20,7 +20,7 @@ view: order_items {
     sql: ${TABLE}.order_id ;;
   }
 
-  dimension_group: returned {
+  dimension_group: item_returned {
     type: time
     hidden: yes
     timeframes: [

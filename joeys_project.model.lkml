@@ -15,6 +15,11 @@ explore: orders {
     relationship: one_to_many
     sql_on: ${orders.id} = ${order_items.order_id} ;;
   }
+  join: products {
+    view_label: "Orders"
+    relationship: many_to_one
+    sql_on:  ${order_items.inventory_item_id} = ${products.id} ;;
+  }
   join: users {
     view_label: "Users"
     relationship: many_to_one

@@ -3,7 +3,6 @@ view: users {
 
   dimension: id {
     primary_key: yes
-    hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -24,7 +23,7 @@ view: users {
     sql: ${TABLE}.country ;;
   }
 
-  dimension_group: joined{
+  dimension_group: created {
     type: time
     timeframes: [
       raw,
@@ -43,8 +42,14 @@ view: users {
     sql: ${TABLE}.email ;;
   }
 
+  dimension: name {
+    type: string
+    sql: concat(${TABLE}.first_name,' ',${TABLE}.last_name) ;;
+  }
+
   dimension: first_name {
     type: string
+    hidden: yes
     sql: ${TABLE}.first_name ;;
   }
 
@@ -55,6 +60,7 @@ view: users {
 
   dimension: last_name {
     type: string
+    hidden: yes
     sql: ${TABLE}.last_name ;;
   }
 

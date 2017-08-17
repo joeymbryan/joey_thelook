@@ -1,5 +1,18 @@
 view: orders {
-  sql_table_name: demo_db.orders ;;
+  derived_table: {
+    sql:select
+          orders.id as id,
+          orders.created_at as created_at,
+          orders.status as status,
+          orders.user_id as user_id,
+          round(sum(order_items.sale_price),2) as total_cost_of_order
+        from
+          orders
+          left join demo_db.order_items on orders.id = order_items.order_id
+        where
+          order_items.returned_at is null
+        group by id ;;
+  }
 
   dimension: id {
     primary_key: yes
@@ -7,7 +20,7 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
-  dimension_group: order {
+  dimension_group: created {
     type: time
     timeframes: [
       raw,
@@ -30,6 +43,11 @@ view: orders {
     type: number
     sql: ${TABLE}.user_id ;;
     hidden: yes
+  }
+
+  dimension: total_cost_of_order {
+    type: number
+    sql: ${TABLE}.total_cost_of_order ;;
   }
 
 
