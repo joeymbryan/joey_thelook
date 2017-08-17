@@ -5,7 +5,6 @@ view: orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    hidden: yes
   }
 
   dimension_group: order {

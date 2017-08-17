@@ -10,9 +10,13 @@ include: "*.dashboard"
 # NOTE: for BigQuery specific considerations
 
 explore: orders {
-  join: users {
+  join: order_items {
     view_label: "Orders"
-    type: left_outer
+    relationship: one_to_many
+    sql_on: ${orders.id} = ${order_items.order_id} ;;
+  }
+  join: users {
+    view_label: "Users"
     relationship: many_to_one
     sql_on: ${orders.user_id} = ${users.id} ;;
   }
