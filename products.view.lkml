@@ -49,7 +49,7 @@ view: products {
   #####      Measures      #####
   ##############################
 
-  measure: count {
+  measure: total_products {
     type: count
     drill_fields: [id, item_name]
   }

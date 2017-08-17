@@ -74,7 +74,7 @@ view: users {
   #####      Measures      #####
   ##############################
 
-  measure: count {
+  measure: total_users {
     type: count
     drill_fields: [id, last_name, first_name, orders.count]
   }

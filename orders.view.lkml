@@ -39,7 +39,7 @@ view: orders {
   #####      Measures      #####
   ##############################
 
-  measure: count {
+  measure: total_orders {
     type: count
     drill_fields: [id]
   }
