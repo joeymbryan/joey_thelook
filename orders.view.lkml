@@ -1,6 +1,13 @@
 view: orders {
-  sql_table_name: demo_db.orders ;;
-
+  derived_table: {
+    sql:  select
+            a.*,
+            count(*) as created_rank
+          from orders a
+            inner join orders b
+            on a.user_id = b.user_id and a.created_at >= b.created_at
+          group by a.user_id, a.id ;;
+  }
   dimension: id {
     primary_key: yes
     type: number
@@ -32,6 +39,11 @@ view: orders {
     hidden: yes
   }
 
+  dimension: created_rank {
+    type:  number
+    sql: ${TABLE}.created_rank ;;
+  }
+
 
 
   ##############################
@@ -42,11 +54,6 @@ view: orders {
     type: count
     drill_fields: [id]
   }
-
-#   measure: first_order_date {
-#     type: date
-#     sql: MIN(${created_date});;
-#   }
 
 #   dimension: gross_prophet_margin {
 #     type: number

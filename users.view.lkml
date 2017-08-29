@@ -85,5 +85,10 @@ view: users {
     drill_fields: [id, last_name, first_name, orders.total_orders]
   }
 
+#   measure: first_order {
+#     type: date
+#     sql: min(${TABLE}.created_at) ;;
+#   }
+
 
 }
