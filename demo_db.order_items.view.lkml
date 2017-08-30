@@ -1,19 +1,5 @@
 view: order_items {
-#   sql_table_name: demo_db.order_items ;;
-
-  derived_table: {
-    sql: select
-          order_items.id,
-          order_items.inventory_item_id,
-          order_items.order_id,
-          order_items.returned_at,
-          order_items.sale_price,
-          round(( order_items.sale_price - inventory_items.cost ),2) as item_prophet_margin
-        from
-          demo_db.order_items
-        left join
-          demo_db.inventory_items on order_items.inventory_item_id = inventory_items.id ;;
-  }
+sql_table_name: demo_db.order_items ;;
 
   dimension: id {
     primary_key: yes
@@ -81,7 +67,7 @@ view: order_items {
 
   measure: total_prophet_of_order {
     type: sum
-    sql: ${TABLE}.item_prophet_margin ;;
+    sql: ${item_prophet_margin} ;;
     value_format_name: usd
   }
 #

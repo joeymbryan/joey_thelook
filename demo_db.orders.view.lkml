@@ -1,12 +1,19 @@
 view: orders {
   derived_table: {
-    sql:  select
-            a.*,
-            count(*) as created_rank
-          from orders a
-            inner join orders b
-            on a.user_id = b.user_id and a.created_at >= b.created_at
-          group by a.user_id, a.id ;;
+    sql:select
+          *,
+          ranked.rank as created_rank
+        from orders
+          # Rank orders on created_date by user
+          inner join
+            (select
+              a.id as order_id,
+              count(*) as rank
+            from orders a
+              inner join orders b
+              on a.user_id = b.user_id and a.created_at >= b.created_at
+            group by a.user_id, a.id) as ranked
+          on orders.id = ranked.order_id;;
   }
   dimension: id {
     primary_key: yes
