@@ -9,30 +9,30 @@ include: "*.dashboard"
 # NOTE: please see https://looker.com/docs/r/sql/bigquery?version=4.20
 # NOTE: for BigQuery specific considerations
 
-explore: orders {
-  join: order_items {
+explore: demo_db_orders {
+  join: demo_db_order_items {
     view_label: "Orders"
     relationship: one_to_many
-    sql_on: ${orders.id} = ${order_items.order_id};;
+    sql_on: ${demo_db_orders.id} = ${demo_db_order_items.order_id};;
   }
-  join: inventory_items {
+  join: demo_db_inventory_items {
     view_label: "Orders"
     relationship: one_to_one
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+    sql_on: ${demo_db_order_items.inventory_item_id} = ${demo_db_inventory_items.id} ;;
   }
-  join: products {
+  join: demo_db_products {
     view_label: "Orders"
     relationship: many_to_one
-    sql_on:   ${inventory_items.product_id} = ${products.id};;
+    sql_on:   ${demo_db_inventory_items.product_id} = ${demo_db_products.id};;
   }
   join: derived_orders {
     view_label: "Orders"
     relationship: one_to_one
-    sql_on: ${orders.id} = ${derived_orders.id} ;;
+    sql_on: ${demo_db_orders.id} = ${derived_orders.id} ;;
   }
-  join: users {
+  join: demo_db_users {
     view_label: "Orders"
     relationship: many_to_one
-    sql_on: ${orders.user_id} = ${users.id} ;;
+    sql_on: ${demo_db_orders.user_id} = ${demo_db_users.id} ;;
   }
 }

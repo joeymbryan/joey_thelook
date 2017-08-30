@@ -1,4 +1,4 @@
-view: order_items {
+view: demo_db_order_items {
 sql_table_name: demo_db.order_items ;;
 
   dimension: id {
@@ -41,13 +41,8 @@ sql_table_name: demo_db.order_items ;;
 
   dimension: item_prophet_margin {
     type: number
-    sql: round(( ${TABLE}.sale_price - ${inventory_items.cost} ),2) ;;
+    sql: round(( ${sale_price} - ${demo_db_inventory_items.cost} ),2) ;;
   }
-
-#   dimension: gross_prophet_margin {
-#     type: number
-#     sql: round(${TABLE}.sale_price - ${inventory_items}.cost,2) ;;
-#   }
 
   measure: total_items {
     type: count
@@ -55,13 +50,13 @@ sql_table_name: demo_db.order_items ;;
 
   measure: total_cost_of_order {
     type: sum
-    sql: ${TABLE}.sale_price ;;
+    sql: ${sale_price} ;;
     value_format_name: usd
   }
 
   measure: average_cost_of_order {
     type: average
-    sql: ${TABLE}.sale_price ;;
+    sql: ${sale_price} ;;
     value_format_name: usd
   }
 
@@ -70,10 +65,9 @@ sql_table_name: demo_db.order_items ;;
     sql: ${item_prophet_margin} ;;
     value_format_name: usd
   }
-#
-#   measure: average_prophet_of_order {
-#     type: average
-#     sql: ${TABLE}.item_prophet_margin ;;
-#     value_format_name: usd
-#   }
+
+  measure: average_prophet_of_order {
+    sql: sum(${item_prophet_margin}) / count(*) ;;
+    value_format_name: usd
+  }
 }
