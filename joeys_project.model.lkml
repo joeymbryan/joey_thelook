@@ -10,6 +10,8 @@ include: "*.dashboard"
 # NOTE: for BigQuery specific considerations
 
 explore: demo_db_orders {
+  label: "Orders"
+  view_label: "Orders"
   join: demo_db_order_items {
     view_label: "Orders"
     relationship: one_to_many
@@ -29,6 +31,11 @@ explore: demo_db_orders {
     view_label: "Orders"
     relationship: one_to_one
     sql_on: ${demo_db_orders.id} = ${derived_orders.id} ;;
+  }
+  join: derived_avg_order_prophet {
+    view_label: "Orders"
+    relationship: one_to_many
+    type: cross
   }
   join: demo_db_users {
     view_label: "Orders"

@@ -9,31 +9,46 @@ view: demo_db_products {
   }
 
   dimension: brand {
+    hidden: no
+    group_label: "Product Info"
+    label: "Product Brand"
+    description: "The Brand which created the product"
     type: string
     sql: ${TABLE}.brand ;;
   }
 
   dimension: category {
+    hidden: no
+    group_label: "Product Info"
+    label: "Category"
+    description: "What type of product it is."
     type: string
     sql: ${TABLE}.category ;;
   }
 
   dimension: department {
+    hidden: no
+    group_label: "Product Info"
+    label: "Department"
+    description: "Which department of the store sells this product"
     type: string
     sql: ${TABLE}.department ;;
   }
 
   dimension: item_name {
+    hidden: no
+    group_label: "Product Info"
+    label: "Name"
+    description: "name of the product"
     type: string
     sql: ${TABLE}.item_name ;;
   }
 
-  dimension: rank {
-    type: number
-    sql: ${TABLE}.rank ;;
-  }
-
   dimension: retail_price {
+    hidden: no
+    group_label: "Product Info"
+    label: "Retail Price"
+    description: "How much the product is sold for"
     type: number
     sql: ${TABLE}.retail_price ;;
   }
@@ -42,15 +57,5 @@ view: demo_db_products {
     hidden: yes
     type: string
     sql: ${TABLE}.sku ;;
-  }
-
-
-  ##############################
-  #####      Measures      #####
-  ##############################
-
-  measure: total_products {
-    type: count
-    drill_fields: [id, item_name]
   }
 }

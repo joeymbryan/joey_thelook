@@ -9,13 +9,20 @@ sql_table_name: demo_db.order_items ;;
   }
 
   dimension: inventory_item_id {
+    hidden: yes
+    group_label: "Inventory Item"
+    label: "Inventory Item ID"
+    description: "ID of individual item in inventory"
     type: number
     sql: ${TABLE}.inventory_item_id ;;
   }
 
   dimension: order_id {
-    type: number
     hidden: yes
+    group_label: "First / Most Recent Order"
+    label: "First"
+    description: "This is the first order the user ever made"
+    type: number
     sql: ${TABLE}.order_id ;;
   }
 
@@ -44,9 +51,11 @@ sql_table_name: demo_db.order_items ;;
     sql: round(( ${sale_price} - ${demo_db_inventory_items.cost} ),2) ;;
   }
 
-  measure: total_items {
-    type: count
-  }
+
+
+  ##############################
+  #####      Measures      #####
+  ##############################
 
   measure: total_cost_of_order {
     type: sum
@@ -63,11 +72,6 @@ sql_table_name: demo_db.order_items ;;
   measure: total_prophet_of_order {
     type: sum
     sql: ${item_prophet_margin} ;;
-    value_format_name: usd
-  }
-
-  measure: average_prophet_of_order {
-    sql: sum(${item_prophet_margin}) / count(*) ;;
     value_format_name: usd
   }
 }

@@ -49,8 +49,4 @@ view: demo_db_inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
-#   measure: count {
-#     type: count
-#     drill_fields: [id]
-#   }
 }

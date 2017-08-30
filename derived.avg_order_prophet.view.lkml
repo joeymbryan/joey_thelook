@@ -11,6 +11,8 @@ view: derived_avg_order_prophet {
 
   # Define your dimensions and measures here, like this:
   dimension: avg_prophet_margin_per_order {
+    hidden:  no
+    group_label: "Prophet"
     description: "Unique ID for each user that has ordered"
     type: number
     sql: ${TABLE}.avg_prophet_margin_per_order ;;

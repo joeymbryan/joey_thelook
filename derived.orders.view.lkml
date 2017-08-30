@@ -3,8 +3,8 @@ view: derived_orders {
   derived_table: {
     sql: select
           id,
-          created_rank_first,
-          created_rank_last
+          rank_asc as created_rank_first,
+          rank_desc as created_rank_last
         from orders
           # Rank orders on created_date from earliest to latest by user
           inner join
@@ -59,7 +59,7 @@ view: derived_orders {
 
   dimension: is_first_order {
     hidden: no
-    group_label: "First / Last Order"
+    group_label: "First / Most Recent Order"
     label: "First"
     description: "This is the first order the user ever made"
     type: yesno
