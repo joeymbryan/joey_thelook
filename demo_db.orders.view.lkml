@@ -1,20 +1,6 @@
 view: orders {
-  derived_table: {
-    sql:select
-          *,
-          ranked.rank as created_rank
-        from orders
-          # Rank orders on created_date by user
-          inner join
-            (select
-              a.id as order_id,
-              count(*) as rank
-            from orders a
-              inner join orders b
-              on a.user_id = b.user_id and a.created_at >= b.created_at
-            group by a.user_id, a.id) as ranked
-          on orders.id = ranked.order_id;;
-  }
+  sql_table_name: demo_db.orders ;;
+
   dimension: id {
     primary_key: yes
     type: number
@@ -46,11 +32,6 @@ view: orders {
     hidden: yes
   }
 
-  dimension: created_rank {
-    type:  number
-    sql: ${TABLE}.created_rank ;;
-  }
-
 
 
   ##############################
@@ -61,25 +42,5 @@ view: orders {
     type: count
     drill_fields: [id]
   }
-
-#   dimension: gross_prophet_margin {
-#     type: number
-#     sql: ${TABLE}.gross_prophet_margin ;;
-#   }
-
-#   measure: total_cost_of_order {
-#     type: sum
-#     sql: ${order_items.item_prophet_margin} ;;
-#   }
-
-#   measure: total_cost_of_order {
-#     type: sum
-#     sql: ${order_items.sale_price} ;;
-#   }
-#
-#   measure: total_prophet_of_order {
-#     type: sum
-#     sql: ${order_items.item_prophet_margin} ;;
-#   }
 
 }
